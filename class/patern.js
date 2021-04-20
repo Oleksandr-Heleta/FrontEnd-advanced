@@ -158,7 +158,7 @@ console.log(new Universe() === new Universe()); */
  */
 
 
-// old interface
+/* // old interface
 class OldCalculator {
     constructor() {
         this.operations = function(term1, term2, operation) {
@@ -213,4 +213,105 @@ const newCalc = new NewCalculator();
 console.log(newCalc.add(10, 5)); // 15
 
 const adaptedCalc = new AdapterNewToOldCalc();
-console.log(adaptedCalc.operations(10, 5, 'add')); // 15;
+console.log(adaptedCalc.operations(10, 5, 'add')); // 15; */
+
+
+
+
+//_______________ Factory_________
+// Для групирования  однотипных функций
+
+/*  function Factory() {
+    this.createEmployee = function (type) {
+        var employee;
+        if(type === 'fulltime') { 
+            employee = new FullTime();
+        } else if(type === 'parttime') {
+            employee = new PartTime();
+        } else if(type === 'temporary') {
+            employee = new Temporary();
+        } else if(type === 'contractor') {
+            employee = new Contractor();
+        }
+        
+        employee.type = type;
+        
+        return employee;
+    }
+}
+
+
+function FullTime() {
+    this.hourly = 20;
+}
+
+function PartTime() {
+    this.hourly = 10;
+}
+
+function Temporary() {
+    this.hourly = 12;
+}
+
+function Contractor() {
+    this.hourly = 18;
+}
+
+var factory = new Factory();
+factory.createEmployee('fulltime'); */
+
+
+
+
+
+// ___________________Chain Of Responsibility__________
+
+/* var arr = [2, 3, 1, 6]
+    .sort()
+    .map(num => num + 1)
+    .filter(v => v % 2);
+
+const promise = new Promise((res, rej) => {
+    // ...
+});
+
+promise
+    .then()
+    .then()
+    .then()
+    .catch() */
+
+
+
+// _________________-Observer (PubSub)________
+
+    function Click() {
+        this.handlers = [];
+    }
+    
+    Click.prototype = {
+        subscribe: function (name, fn) {
+            this.handlers.push({name, fn});
+        },
+        
+        unsubscribe: function (name) {
+            this.handlers.filter(function (item) {
+                if(name !== item.name) {
+                    return item;
+                }
+            })
+        },
+        
+        fire: function (name) {
+            this.handlers.forEach(function (item) {
+                if(name === item.name) {
+                    item.fn();
+                }
+            })
+        }
+    }
+    
+    var click = new Click();
+    click.subscribe({name: 'X', fn: 'FX'});
+    click.unsubscribe('X');
+    click.fire('X');
